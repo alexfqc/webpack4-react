@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
     entry: [
@@ -11,6 +12,20 @@ module.exports = {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: ['babel-loader']
+        },
+        {
+          test: /\.css$/,
+          include: path.resolve(__dirname, './src'),
+          use: [
+            {
+              loader: 'style-loader'
+            },
+            {
+              loader:
+                'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+            }
+          ],
+          exclude: /node_modules/
         }
       ]
     },
