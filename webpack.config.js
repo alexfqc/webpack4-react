@@ -3,10 +3,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: [
-      'react-hot-loader/patch',
-      './src/index.js'
-    ],
+    entry: 
+    process.env.NODE_ENV === 'development' ?
+      [
+        'react-hot-loader/patch',
+        './src/index.js'
+      ] :
+    ['./src/index.js'],
     module: {
       rules: [
         {
@@ -50,6 +53,6 @@ module.exports = {
     ],
     devServer: {
       contentBase: './dist',
-      hot: true
+      hot: process.env.NODE_ENV === 'development'
     }
   };
