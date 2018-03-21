@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: [
@@ -38,7 +39,14 @@ module.exports = {
       filename: 'bundle.js'
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new HtmlWebpackPlugin({
+        title: 'alexfqc',
+        template: path.resolve(__dirname, 'src/index-template.html'),
+        minify: {
+          collapseWhitespace: process.env.NODE_ENV === 'production'
+        }
+      })
     ],
     devServer: {
       contentBase: './dist',
